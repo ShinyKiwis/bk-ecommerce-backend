@@ -7,9 +7,9 @@ validateEnv()
 
 const app = new App(
   [
-
+    new CategoriesRoute()
   ]
-)
+);
 
 app.listen()
 

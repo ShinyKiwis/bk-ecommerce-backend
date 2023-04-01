@@ -1,6 +1,6 @@
 import * as express from "express"
 import * as bodyParser from "body-parser"
-import Controller from "interface/controller.interface";
+import Controller from "controllers/category/controller.interface";
 
 class App{
   private app: express.Application;
