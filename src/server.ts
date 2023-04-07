@@ -1,3 +1,4 @@
+import { CategoryController } from "./controllers/category/category.controller";
 import App from "./app";
 import validateEnv from "./utils/validateEnv"
 import * as dotenv from "dotenv"
@@ -7,7 +8,7 @@ validateEnv()
 
 const app = new App(
   [
-    new CategoriesRoute()
+    new CategoryController()
   ]
 );
 

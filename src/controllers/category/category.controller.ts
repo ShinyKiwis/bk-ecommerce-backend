@@ -14,7 +14,7 @@ export class CategoryController implements Controller {
   }
 
   private initializeRoutes() {
-    this.router.get('/', this.getAll.bind(this));
+    this.router.get(this.path, this.getAll.bind(this));
   }
 
   async getAll(req: Request, res: Response): Promise<void> {
