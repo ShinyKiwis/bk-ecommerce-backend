@@ -5,7 +5,12 @@
     "sourceMap": true,
     "target": "es2017",
     "outDir": "./dist",
-    "baseUrl": "./src"
+    "baseUrl": ".",
+    "paths": {
+      "interfaces/*": ["./src/interfaces/*"],
+      "controllers/*": ["./src/controllers/*"],
+      "utils/*": ["./src/utils/*"]
+    }
   },
   "include": [
     "src/**/*.ts"

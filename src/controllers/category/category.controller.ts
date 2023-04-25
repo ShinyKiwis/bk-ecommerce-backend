@@ -1,24 +1,26 @@
-import { Request, Response, Router } from 'express';
-import { CategoryModel } from '../../models/category';
-import pool from '../../utils/database';
-import Controller from './controller.interface';
+import { Router, Request, Response } from 'express';
+import Controller from 'interfaces/controller.interface';
+import Database from 'utils/database';
 
-export class CategoryController implements Controller {
+class CategoryController implements Controller {
   public path = '/categories';
+  private database = new Database();
   public router = Router();
-  private model: CategoryModel;
 
   constructor() {
-    this.model = new CategoryModel(pool);
     this.initializeRoutes();
   }
 
   private initializeRoutes() {
-    this.router.get(this.path, this.getAll.bind(this));
+    this.router.get(`${this.path}/`, this.getCategories);
   }
 
-  async getAll(req: Request, res: Response): Promise<void> {
-    const categories = await this.model.getAll();
-    res.json(categories);
+  private getCategories = async (req: Request, res:Response) => {
+    const categories = await this.database.pool.query("SELECT * FROM categories;")
+    res.send(JSON.stringify({data: categories.rows}))
   }
+
+
 }
+
+export default CategoryController;
