@@ -1,7 +1,5 @@
-import { RedisClientType } from '@redis/client';
 import { Router, Request, Response } from 'express';
 import Controller from 'interfaces/controller.interface';
-import { createClient } from 'redis';
 import Database from 'utils/database';
 
 class UserController implements Controller {
