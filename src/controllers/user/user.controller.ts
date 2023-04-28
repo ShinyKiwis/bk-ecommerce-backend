@@ -13,11 +13,12 @@ class UserController implements Controller {
 
   private initializeRoutes = () => {
     this.router.post(`${this.path}/register`, this.createUser);
-    this.router.get(`${this.path}/`, this.getUser);
+    this.router.get(`${this.path}/:username/:password`, this.getUser);
   };
 
   private createUser = async (req: Request, res: Response) => {
     const { username, password } = req.body;
+    console.log(username, password)
     try{
       const result = await this.database.pool.query(
         'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *', [username, password]
@@ -30,11 +31,12 @@ class UserController implements Controller {
   };
 
   private getUser = async (req: Request, res: Response) => {
-    const {username, password} = req.body 
-    // console.log(username)
+    console.log(req.body)
+    const {username, password} = req.params 
+    console.log(username, password)
     const result = await this.database.pool.query(`SELECT * FROM users where users.username = '${username}'`)
     if (result.rows[0]["password"] == password){
-      res.send(JSON.stringify(result.rows[0]))
+      res.send(JSON.stringify({data: result.rows[0]}))
     }else{
       res.send("Failed")
     }
